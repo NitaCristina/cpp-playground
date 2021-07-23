@@ -43,15 +43,24 @@ int main(int argc, char *argv[])
 	std::string argumentAsString = argv[1];
 	const char* argumentAsCharArray = argumentAsString.c_str();
 
+
 	//number = argv[1]; // No
 	//should use atoi?
 	// or std::stoi?
 
-	std::cout << argumentAsString << std::endl; // i think this should be removed
+	//atoi() converts C-strings (nul terminated character arrays) to an integer.
+	//If you put non-numbers on the command line, these come back from atoi( ) as zero.
+	//stoi() converts the C++ string to an integer, stoi() function will fail if the string is not convertible to an int
+	number = atoi(argumentAsCharArray);
+	if (number!=0 || *argumentAsCharArray =='0') {
+		printOddOrEven(number);
+	}
+	else
+	{
+		printf("NAN\n");
+	}
 
 	// --------------- stop
-
-	printOddOrEven(number);
 
 	return 0;
 }
