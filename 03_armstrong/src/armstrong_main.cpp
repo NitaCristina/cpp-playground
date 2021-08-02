@@ -1,10 +1,35 @@
 #include <iostream>
+#include <math.h>
+#include <string>
+
+int numberOfDigits(int x)
+{
+	int n = 0;
+	while (x != 0)
+	{
+		n++;
+		x = x / 10;
+	}
+	return n;
+}
+
 
 bool isArmstrongNumber(int number)
 {
 	// TODO: implement some functionality to see if this number is an armstrong number
+	int aux = number, sum = 0;
+	int n = numberOfDigits(number);
+	while (aux != 0)
+	{
+		int cif = aux % 10;
+		sum = sum + pow(cif, n);
+		aux = aux / 10;
+	}
 
-	return false;
+	if (sum == number)
+		return true;
+	else
+		return false;
 }
 
 void printIsArmstrong(int number)
@@ -50,9 +75,16 @@ int main(int argc, char *argv[])
 	int readNumber = 0;
 	// Get the first argument
 	std::string argumentAsString = argv[1];
-	
 	// TODO: read number / cast to integer
+	try {
+		int intReadNumber = stoi(argumentAsString);
+		printIsArmstrong(intReadNumber);
+	}
+	catch (std::invalid_argument&) {
+		// if no conversion could be performed
+		std::cout << "Undefined output" << std::endl;
 
-	printIsArmstrong(readNumber);
+	}
+
 	return 0;
 }
