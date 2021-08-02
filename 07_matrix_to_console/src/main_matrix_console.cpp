@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <stdio.h>
+
 
 /**
 	Define a simple matrix.
@@ -13,16 +15,29 @@ private:
 
 	// TODO: store the data
 	// hints: you can use std::string, std::vectors + string, char**, vector<vector<char>>, etc
+	//std::vector<std::vector<char> > mat;
+	char mat[10][20];
+	char p[20];
 public:
 	Matrix(size_t numColumnsX, size_t numLinesY)
 		// TODO: add functionality
 	{
+		this->line_count = numLinesY;
+		this->column_count = numColumnsX;
 		// TODO: add functionality
 	}
 
 	// Set an entire line
 	void setLine(size_t line_number, const std::string& data)
 	{
+
+		int i;
+		for (i = 0; i < sizeof(p); i++) {
+			p[i] = data[i];
+			mat[line_number][i] = p[i];
+
+		}	
+		
 	}
 
 	//OPTIONAL
@@ -55,10 +70,23 @@ public:
 	void setCellXY(size_t x, size_t y, char cell_content)
 	{
 		// TODO: add functionality
+		
+			mat[y][x] = cell_content;
+
+		
 	}
 
 	void print()
 	{
+		for (int i = 0; i < line_count; i++)
+		{
+			for (int j = 0; j < column_count; j++)
+			{
+				std::cout << mat[i][j];
+			}
+			std::cout << std::endl;
+		}
+
 		// print all lines and columns
 		// TODO: add functionality
 	}
@@ -81,6 +109,7 @@ int main()
 	matrix.setLine(9, "-----------------X--");
 
 	matrix.print();
+	std::cout << std::endl;
 	// Would print
 /*
 X-----X----X-----XX-
@@ -96,6 +125,8 @@ X-----X----X-----XX-
 */
 	matrix.setCellXY(2, 1, '-');
 	matrix.print();
+	std::cout << std::endl;
+
 	// Would print
 /*
 X-----X----X-----XX-
@@ -112,6 +143,8 @@ X-----X----X-----XX-
 
 	matrix.setCellXY(3, 7, 'O');
 	matrix.print();
+	std::cout << std::endl;
+
 /*
 X-----X----X-----XX-
 --------------------
@@ -126,6 +159,6 @@ X-----X----X-----XX-
 */
 
 	// This should silently fail (not trigger an error): cell Y=11 invalid due to limited height.
-	matrix.setCellXY(3, 11, 'O');
+	//matrix.setCellXY(3, 11, 'O');
 	return 0;
 }
